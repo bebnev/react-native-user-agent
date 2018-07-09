@@ -1,0 +1,28 @@
+
+{
+  "name": "react-native-user-agent",
+  "version": "0.0.1",
+  "description": "Library that helps you to get mobile application user agent and web view user agent strings.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bebnev/react-native-user-agent.git"
+  },
+  "keywords": [
+    "react-native",
+    "user-agent",
+    "user agent",
+    "http",
+    "webView",
+    "httpUserAgent"
+  ],
+  "author": "Bebnev Anton <bambr.ab@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bebnev/react-native-user-agent/issues"
+  },
+  "homepage": "https://github.com/bebnev/react-native-user-agent#readme",
+  "peerDependencies": {
+    "react-native": "^0.41.2"
+  }
+}
