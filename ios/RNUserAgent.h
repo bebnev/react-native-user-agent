@@ -9,5 +9,5 @@
 #endif
 
 @interface RNUserAgent : NSObject <RCTBridgeModule>
-
+@property (nonatomic) bool isEmulator;
 @end

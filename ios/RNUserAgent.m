@@ -7,6 +7,8 @@
 
 @implementation RNUserAgent
 
+@synthesize isEmulator;
+
 RCT_EXPORT_MODULE(RNUserAgent);
 
 + (BOOL)requiresMainQueueSetup
@@ -30,19 +32,23 @@ RCT_EXPORT_MODULE(RNUserAgent);
 
     NSString* deviceIdentifier = [NSString stringWithUTF8String:systemInfo.machine];
 
-    static NSDictionary* deviceNamesByCode = nil;
+    if ([deviceIdentifier isEqualToString:@"i386"] || [deviceIdentifier isEqualToString:@"x86_64"]) {
+        deviceIdentifier = [NSString stringWithFormat:@"%s", getenv("SIMULATOR_MODEL_IDENTIFIER")];
+        self.isEmulator = YES;
+    } else {
+        self.isEmulator = NO;
+    }
 
-    if (!deviceNamesByCode) {
+    static NSDictionary* deviceNames = nil;
 
-        deviceNamesByCode = @{@"iPod1,1"   :@"iPod",      // (Original)
+    if (!deviceNames) {
+
+        deviceNames = @{@"iPod1,1"   :@"iPod",      // (Original)
                               @"iPod2,1"   :@"iPod",      // (Second Generation)
                               @"iPod3,1"   :@"iPod",      // (Third Generation)
                               @"iPod4,1"   :@"iPod",      // (Fourth Generation)
                               @"iPod5,1"   :@"iPod",      // (Fifth Generation)
                               @"iPod7,1"   :@"iPod",      // (Sixth Generation)
-                              @"iPhone1,1" :@"iPhone",          // (Original)
-                              @"iPhone1,2" :@"iPhone/3G",       // (3G)
-                              @"iPhone2,1" :@"iPhone/3GS",      // (3GS)
                               @"iPad1,1"   :@"iPad",            // (Original)
                               @"iPad2,1"   :@"iPad/2",          //
                               @"iPad2,2"   :@"iPad/2",          //
@@ -51,37 +57,12 @@ RCT_EXPORT_MODULE(RNUserAgent);
                               @"iPad3,1"   :@"iPad",            // (3rd Generation)
                               @"iPad3,2"   :@"iPad",            // (3rd Generation)
                               @"iPad3,3"   :@"iPad",            // (3rd Generation)
-                              @"iPhone3,1" :@"iPhone/4",        // (GSM)
-                              @"iPhone3,2" :@"iPhone/4",        // iPhone 4
-                              @"iPhone3,3" :@"iPhone/4",        // (CDMA/Verizon/Sprint)
-                              @"iPhone4,1" :@"iPhone/4S",       //
-                              @"iPhone5,1" :@"iPhone/5",        // (model A1428, AT&T/Canada)
-                              @"iPhone5,2" :@"iPhone/5",        // (model A1429, everything else)
                               @"iPad3,4"   :@"iPad",            // (4th Generation)
                               @"iPad3,5"   :@"iPad",            // (4th Generation)
                               @"iPad3,6"   :@"iPad",            // (4th Generation)
                               @"iPad2,5"   :@"iPad/Mini",       // (Original)
                               @"iPad2,6"   :@"iPad/Mini",       // (Original)
                               @"iPad2,7"   :@"iPad/Mini",       // (Original)
-                              @"iPhone5,3" :@"iPhone/5c",       // (model A1456, A1532 | GSM)
-                              @"iPhone5,4" :@"iPhone/5c",       // (model A1507, A1516, A1526 (China), A1529 | Global)
-                              @"iPhone6,1" :@"iPhone/5s",       // (model A1433, A1533 | GSM)
-                              @"iPhone6,2" :@"iPhone/5s",       // (model A1457, A1518, A1528 (China), A1530 | Global)
-                              @"iPhone7,1" :@"iPhone/6_Plus",   //
-                              @"iPhone7,2" :@"iPhone/6",        //
-                              @"iPhone8,1" :@"iPhone/6s",       //
-                              @"iPhone8,2" :@"iPhone/6s_Plus",  //
-                              @"iPhone8,4" :@"iPhone/..SE",       //
-                              @"iPhone9,1" :@"iPhone/7",        // (model A1660 | CDMA)
-                              @"iPhone9,3" :@"iPhone/7",        // (model A1778 | Global)
-                              @"iPhone9,2" :@"iPhone/7_Plus",   // (model A1661 | CDMA)
-                              @"iPhone9,4" :@"iPhone/7_Plus",   // (model A1784 | Global)
-                              @"iPhone10,3":@"iPhone/X",        // (model A1865, A1902)
-                              @"iPhone10,6":@"iPhone/X",        // (model A1901)
-                              @"iPhone10,1":@"iPhone/8",        // (model A1863, A1906, A1907)
-                              @"iPhone10,4":@"iPhone/8",        // (model A1905)
-                              @"iPhone10,2":@"iPhone/8_Plus",   // (model A1864, A1898, A1899)
-                              @"iPhone10,5":@"iPhone/8_Plus",   // (model A1897)
                               @"iPad4,1"   :@"iPad/Air",        // 5th Generation iPad (iPad Air) - Wifi
                               @"iPad4,2"   :@"iPad/Air",        // 5th Generation iPad (iPad Air) - Cellular
                               @"iPad4,3"   :@"iPad/Air",        // 5th Generation iPad (iPad Air)
@@ -103,6 +84,34 @@ RCT_EXPORT_MODULE(RNUserAgent);
                               @"iPad7,2"   :@"iPad/Pro_12.9-inch",// 2nd Generation iPad Pro 12.5-inch - Cellular
                               @"iPad7,3"   :@"iPad/Pro_10.5-inch",// iPad/Pro_10.5-inch - Wifi
                               @"iPad7,4"   :@"iPad/Pro_10.5-inch",// iPad/Pro_10.5-inch - Cellular
+                              @"iPhone1,1" :@"iPhone",          // (Original)
+                              @"iPhone1,2" :@"iPhone/3G",       // (3G)
+                              @"iPhone2,1" :@"iPhone/3GS",      // (3GS)
+                              @"iPhone3,1" :@"iPhone/4",        // (GSM)
+                              @"iPhone3,2" :@"iPhone/4",        // iPhone 4
+                              @"iPhone3,3" :@"iPhone/4",        // (CDMA/Verizon/Sprint)
+                              @"iPhone4,1" :@"iPhone/4S",       //
+                              @"iPhone5,1" :@"iPhone/5",        // (model A1428, AT&T/Canada)
+                              @"iPhone5,2" :@"iPhone/5",        // (model A1429, everything else)
+                              @"iPhone5,3" :@"iPhone/5c",       // (model A1456, A1532 | GSM)
+                              @"iPhone5,4" :@"iPhone/5c",       // (model A1507, A1516, A1526 (China), A1529 | Global)
+                              @"iPhone6,1" :@"iPhone/5s",       // (model A1433, A1533 | GSM)
+                              @"iPhone6,2" :@"iPhone/5s",       // (model A1457, A1518, A1528 (China), A1530 | Global)
+                              @"iPhone7,1" :@"iPhone/6_Plus",   //
+                              @"iPhone7,2" :@"iPhone/6",        //
+                              @"iPhone8,1" :@"iPhone/6s",       //
+                              @"iPhone8,2" :@"iPhone/6s_Plus",  //
+                              @"iPhone8,4" :@"iPhone/..SE",       //
+                              @"iPhone9,1" :@"iPhone/7",        // (model A1660 | CDMA)
+                              @"iPhone9,3" :@"iPhone/7",        // (model A1778 | Global)
+                              @"iPhone9,2" :@"iPhone/7_Plus",   // (model A1661 | CDMA)
+                              @"iPhone9,4" :@"iPhone/7_Plus",   // (model A1784 | Global)
+                              @"iPhone10,1":@"iPhone/8",        // (model A1863, A1906, A1907)
+                              @"iPhone10,4":@"iPhone/8",        // (model A1905)
+                              @"iPhone10,2":@"iPhone/8_Plus",   // (model A1864, A1898, A1899)
+                              @"iPhone10,5":@"iPhone/8_Plus",   // (model A1897)
+                              @"iPhone10,3":@"iPhone/X",        // (model A1865, A1902)
+                              @"iPhone10,6":@"iPhone/X",        // (model A1901)
                               @"AppleTV2,1":@"AppleTV",        // Apple TV (2nd Generation)
                               @"AppleTV3,1":@"AppleTV",        // Apple TV (3rd Generation)
                               @"AppleTV3,2":@"AppleTV",        // Apple TV (3rd Generation - Rev A)
@@ -111,7 +120,7 @@ RCT_EXPORT_MODULE(RNUserAgent);
                               };
     }
 
-     NSString* deviceName = [deviceNamesByCode objectForKey:deviceIdentifier];
+     NSString* deviceName = [deviceNames objectForKey:deviceIdentifier];
 
      if (!deviceName) {
         if ([deviceIdentifier rangeOfString:@"iPod"].location != NSNotFound) {
@@ -151,6 +160,7 @@ RCT_EXPORT_MODULE(RNUserAgent);
     NSString *deviceName = [self deviceName];
 
     return @{
+             @"isEmulator": @(self.isEmulator),
              @"systemName": currentDevice.systemName,
              @"systemVersion": currentDevice.systemVersion,
              @"applicationName": appName,
@@ -158,6 +168,7 @@ RCT_EXPORT_MODULE(RNUserAgent);
              @"buildNumber": buildNumber,
              @"darwinVersion": darwinVersion,
              @"cfnetworkVersion": cfnVersion,
+             @"deviceName": deviceName,
              @"userAgent": [NSString stringWithFormat:@"%@/%@.%@ CFNetwork/%@ Darwin/%@ (%@ %@/%@)", appName, appVersion, buildNumber, cfnVersion, darwinVersion, deviceName, currentDevice.systemName, currentDevice.systemVersion],
              @"webViewUserAgent": self.getWebViewUserAgent ?: [NSNull null]
              };
