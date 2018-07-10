@@ -1,4 +1,6 @@
 
+#import <sys/utsname.h>
+
 #if __has_include("RCTBridgeModule.h")
 #import "RCTBridgeModule.h"
 #else
@@ -8,4 +10,3 @@
 @interface RNUserAgent : NSObject <RCTBridgeModule>
 
 @end
-  
