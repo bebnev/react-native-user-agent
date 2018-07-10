@@ -114,16 +114,16 @@ RCT_EXPORT_MODULE(RNUserAgent);
      NSString* deviceName = [deviceNamesByCode objectForKey:deviceIdentifier];
 
      if (!deviceName) {
-        if ([self.deviceId rangeOfString:@"iPod"].location != NSNotFound) {
+        if ([deviceIdentifier rangeOfString:@"iPod"].location != NSNotFound) {
             deviceName = @"iPod";
         }
-        else if([self.deviceId rangeOfString:@"iPad"].location != NSNotFound) {
+        else if([deviceIdentifier rangeOfString:@"iPad"].location != NSNotFound) {
             deviceName = @"iPad";
         }
-        else if([self.deviceId rangeOfString:@"iPhone"].location != NSNotFound){
+        else if([deviceIdentifier rangeOfString:@"iPhone"].location != NSNotFound){
             deviceName = @"iPhone";
         }
-        else if([self.deviceId rangeOfString:@"AppleTV"].location != NSNotFound){
+        else if([deviceIdentifier rangeOfString:@"AppleTV"].location != NSNotFound){
             deviceName = @"AppleTV";
         }
     }
