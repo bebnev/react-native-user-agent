@@ -69,6 +69,7 @@ public class RNUserAgentModule extends ReactContextBaseJavaModule {
 
         PackageManager packageManager = this.reactContext.getPackageManager();
         String packageName = this.reactContext.getPackageName();
+        String shortPackageName = packageName.substring(packageName.lastIndexOf(".") + 1);
         String applicationName = "";
         String applicationVersion = "";
         Integer buildNumber = 0;
@@ -79,7 +80,7 @@ public class RNUserAgentModule extends ReactContextBaseJavaModule {
             applicationName = this.reactContext.getApplicationInfo().loadLabel(this.reactContext.getPackageManager()).toString();
             applicationVersion = info.versionName;
             buildNumber = info.versionCode;
-            userAgent = applicationName + '/' + applicationVersion + '.' + buildNumber.toString() + ' ' + userAgent;
+            userAgent = shortPackageName + '/' + applicationVersion + '.' + buildNumber.toString() + ' ' + userAgent;
 
         } catch(PackageManager.NameNotFoundException e) {
             e.printStackTrace();
@@ -87,7 +88,9 @@ public class RNUserAgentModule extends ReactContextBaseJavaModule {
 
         constants.put("systemName", "Android");
         constants.put("systemVersion", Build.VERSION.RELEASE);
-        constants.put("applicatioName", applicationName);
+        constants.put("packageName", packageName);
+        constants.put("shortPackageName", shortPackageName);
+        constants.put("applicationName", applicationName);
         constants.put("applicationVersion", applicationVersion);
         constants.put("applicationBuildNumber", buildNumber);
         constants.put("userAgent", userAgent);
