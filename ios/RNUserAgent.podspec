@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name         = "RNUserAgent"
-  s.version      = "1.0.0"
+  s.version      = "1.0.3"
   s.summary      = "RNUserAgent"
   s.description  = <<-DESC
                   RNUserAgent
