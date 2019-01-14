@@ -8,8 +8,8 @@ Pod::Spec.new do |s|
                    DESC
   s.homepage     = "https://github.com/bebnev/react-native-user-agent"
   s.license      = "MIT"
-  # s.license      = { :type => "MIT", :file => "FILE_LICENSE" }
-  s.author             = { "author" => "author@domain.cn" }
+  # s.license      = { :type => "MIT", :file => "LICENSE" }
+  s.author             = { "author" => "bambr.ab@gmail.com" }
   s.platform     = :ios, "7.0"
   s.source       = { :git => "https://github.com/bebnev/react-native-user-agent.git", :tag => "master" }
   s.source_files  = "**/*.{h,m}"
@@ -21,4 +21,4 @@ Pod::Spec.new do |s|
 
 end
 
-  
+
