@@ -47,19 +47,6 @@ public class RNUserAgentModule extends ReactContextBaseJavaModule {
             return WebSettings.getDefaultUserAgent(this.reactContext);
         }
 
-        // try {
-        //     Constructor<WebSettings> constructor = WebSettings.class.getDeclaredConstructor(Context.class, WebView.class);
-        //     constructor.setAccessible(true);
-        //     try {
-        //       WebSettings settings = constructor.newInstance(this.reactContext, null);
-        //       return settings.getUserAgentString();
-        //     } finally {
-        //       constructor.setAccessible(false);
-        //     }
-        //   } catch (Exception e) {
-        //     return new WebView(this.reactContext).getSettings().getUserAgentString();
-        //   }
-
         return new WebView(this.reactContext).getSettings().getUserAgentString();
     }
 
