@@ -19,6 +19,12 @@ yarn add react-native-user-agent
 
 `$ react-native link react-native-user-agent`
 
+After that, add this to your `Podfile` and run `pod install`
+
+```
+pod 'RNUserAgent', :path => '../node_modules/react-native-user-agent/ios'
+```
+
 ### Manual installation
 
 
