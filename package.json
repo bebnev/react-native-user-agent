@@ -1,11 +1,11 @@
 {
   "name": "react-native-user-agent",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Library that helps you to get mobile application user agent and web view user agent strings.",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bebnev/react-native-user-agent.git"
+    "url": "https://github.com/bebnev/react-native-user-agent.git"
   },
   "keywords": [
     "react-native",
@@ -20,7 +20,7 @@
   "bugs": {
     "url": "https://github.com/bebnev/react-native-user-agent/issues"
   },
-  "homepage": "https://github.com/bebnev/react-native-user-agent#readme",
+  "homepage": "https://github.com/bebnev/react-native-user-agent",
   "peerDependencies": {
     "react-native": "*"
   }
