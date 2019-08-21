@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
   s.author       = { "Bebnev Anton" => "bambr.ab@gmail.com" }
   s.platform     = :ios, "7.0"
   s.source       = { :git => package["repository"]["url"] }
-  s.source_files = "ios/**/*.{h,m}"
+  s.source_files = "*.{h,m}"
 
   s.dependency "React"
 
