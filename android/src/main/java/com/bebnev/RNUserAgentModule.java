@@ -15,63 +15,78 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.WritableArray;
+import com.facebook.react.module.annotations.ReactModule;
+import com.facebook.react.bridge.UiThreadUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.lang.Runtime;
 
+@ReactModule(name = RNUserAgentModule.NAME)
 public class RNUserAgentModule extends ReactContextBaseJavaModule {
-
-    private final ReactApplicationContext reactContext;
+    public static final String NAME = "RNUserAgent";
 
     public RNUserAgentModule(ReactApplicationContext reactContext) {
         super(reactContext);
-        this.reactContext = reactContext;
     }
 
     @Override
     public String getName() {
-        return "RNUserAgent";
+        return NAME;
     }
 
     protected String getUserAgent() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                return WebSettings.getDefaultUserAgent(getReactApplicationContext());
+            } else {
+                return System.getProperty("http.agent");
+            }
+        } catch (RuntimeException e) {
             return System.getProperty("http.agent");
         }
-
-        return "";
     }
 
-    protected String getWebViewUserAgent() {
-        if (Build.VERSION.SDK_INT >= 17) {
-            return WebSettings.getDefaultUserAgent(this.reactContext);
+    @ReactMethod
+    protected void getWebViewUserAgent(final Promise p) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            p.resolve(WebSettings.getDefaultUserAgent(getReactApplicationContext()));
         }
 
-        return new WebView(this.reactContext).getSettings().getUserAgentString();
+        UiThreadUtil.runOnUiThread(
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        p.resolve(new WebView(getReactApplicationContext()).getSettings().getUserAgentString());
+                    }
+                }
+        );
+    }
+
+    private PackageInfo getPackageInfo() throws Exception {
+        return getReactApplicationContext().getPackageManager().getPackageInfo(getReactApplicationContext().getPackageName(), 0);
     }
 
     @Override
     public Map<String, Object> getConstants() {
-        HashMap<String, Object> constants = new HashMap<String, Object>();
-
-        PackageManager packageManager = this.reactContext.getPackageManager();
-        String packageName = this.reactContext.getPackageName();
+        String packageName = getReactApplicationContext().getPackageName();
         String shortPackageName = packageName.substring(packageName.lastIndexOf(".") + 1);
-        String applicationName = "";
         String applicationVersion = "";
-        Integer buildNumber = 0;
-        String userAgent = this.getUserAgent();
+        String applicationName = "";
+        String buildNumber = "";
+        String userAgent = "";
 
         try {
-            PackageInfo info = packageManager.getPackageInfo(packageName, 0);
-            applicationName = this.reactContext.getApplicationInfo().loadLabel(this.reactContext.getPackageManager()).toString();
-            applicationVersion = info.versionName;
-            buildNumber = info.versionCode;
-            userAgent = shortPackageName + '/' + applicationVersion + '.' + buildNumber.toString() + ' ' + userAgent;
-
-        } catch(PackageManager.NameNotFoundException e) {
+            applicationName = getReactApplicationContext().getApplicationInfo().loadLabel(getReactApplicationContext().getPackageManager()).toString();
+            applicationVersion = getPackageInfo().versionName;
+            buildNumber = Integer.toString(getPackageInfo().versionCode);
+            userAgent = shortPackageName + '/' + applicationVersion + '.' + buildNumber.toString() + ' ' + this.getUserAgent();
+        } catch(Exception e) {
             e.printStackTrace();
         }
+
+        HashMap<String, Object> constants = new HashMap<String, Object>();
 
         constants.put("systemName", "Android");
         constants.put("systemVersion", Build.VERSION.RELEASE);
@@ -79,9 +94,8 @@ public class RNUserAgentModule extends ReactContextBaseJavaModule {
         constants.put("shortPackageName", shortPackageName);
         constants.put("applicationName", applicationName);
         constants.put("applicationVersion", applicationVersion);
-        constants.put("applicationBuildNumber", buildNumber);
+        constants.put("buildNumber", buildNumber);
         constants.put("userAgent", userAgent);
-        constants.put("webViewUserAgent", this.getWebViewUserAgent());
 
         return constants;
     }

@@ -5,11 +5,8 @@ const { RNUserAgent } = NativeModules;
 
 module.exports = {
   ...RNUserAgent,
-  getUserAgent() {
+  getUserAgent: () => {
     return RNUserAgent.userAgent;
-  },
-  getWebViewUserAgent() {
-    return RNUserAgent.webViewUserAgent;
-  },
+  }
 };
 
