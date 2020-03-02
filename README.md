@@ -57,6 +57,7 @@ UserAgent.getWebViewUserAgent() //asynchronous
 | System | User-Agent | WebView User-Agent |
 | ------ | ---------- | ------------------ |
 | iOS    | application-name/1.6.4.176 CFNetwork/897.15 Darwin/17.5.0 (iPhone/6s iOS/11.3) | Mozilla/5.0 (iPhone; CPU iPhone OS 11_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E217 |
+| iOS    | application-name/1.6.4.176 CFNetwork/1098.7 Darwin/19.2.0 (iPhone 11 iOS/13.0) | Mozilla/5.0 (iPhone; CPU iPhone OS 13_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0 Mobile/15E148 |
 | Android | application-name/1.6.7.42 Dalvik/2.1.0 (Linux; U; Android 5.1.1; Android SDK built for x86 Build/LMY48X) | Mozilla/5.0 (Linux; Android 5.1.1; Android SDK built for x86 Build/LMY48X) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/39.0.0.0 Mobile Safari/537.36 |
 
 Additionally module returns a set of constants, that are used in user agent string building.
