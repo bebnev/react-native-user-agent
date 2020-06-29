@@ -75,7 +75,7 @@ For iOS:
 For Android:
 - systemName
 - systemVersion
-- applicatioName
+- applicationName
 - applicationVersion
 - buildNumber
 
