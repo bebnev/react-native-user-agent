@@ -97,6 +97,8 @@ RCT_EXPORT_MODULE(RNUserAgent);
                               @"iPad11,2": @"iPad Mini 5", // (5th Generation iPad Mini)
                               @"iPad11,3": @"iPad Air (3rd generation)",
                               @"iPad11,4": @"iPad Air (3rd generation)",
+                              @"iPad13,1": @"iPad Air (4th generation)",
+                              @"iPad13,2": @"iPad Air (4th generation)",
                               @"iPhone1,1" :@"iPhone",          // (Original)
                               @"iPhone1,2" :@"iPhone/3G",       // (3G)
                               @"iPhone2,1" :@"iPhone/3GS",      // (3GS)
@@ -125,13 +127,22 @@ RCT_EXPORT_MODULE(RNUserAgent);
                               @"iPhone10,4":@"iPhone/8",        // (model A1905)
                               @"iPhone10,5":@"iPhone/8_Plus",   // (model A1897)
                               @"iPhone10,6":@"iPhone/X",        // (model A1901)
-                              @"iPhone11,2": @"iPhone XS", // (model A2097, A2098)
-                              @"iPhone11,4": @"iPhone XS Max", // (model A1921, A2103)
-                              @"iPhone11,6": @"iPhone XS Max", // (model A2104)
-                              @"iPhone11,8": @"iPhone XR", // (model A1882, A1719, A2105)
-                              @"iPhone12,1": @"iPhone 11",
-                              @"iPhone12,3": @"iPhone 11 Pro",
-                              @"iPhone12,5": @"iPhone 11 Pro Max",
+                              @"iPhone11,2": @"iPhone/XS", // (model A2097, A2098)
+                              @"iPhone11,4": @"iPhone/XS_Max", // (model A1921, A2103)
+                              @"iPhone11,6": @"iPhone/XS_Max", // (model A2104)
+                              @"iPhone11,8": @"iPhone/XR", // (model A1882, A1719, A2105)
+                              @"iPhone12,1": @"iPhone/11",
+                              @"iPhone12,3": @"iPhone/11_Pro",
+                              @"iPhone12,5": @"iPhone/11_Pro_Max",
+                              @"iPhone12,8": @"iPhone/SE", // (2nd Generation iPhone SE),
+                              @"iPhone13,1": @"iPhone/12_mini",
+                              @"iPhone13,2": @"iPhone/12",
+                              @"iPhone13,3": @"iPhone/12_Pro",
+                              @"iPhone13,4": @"iPhone/12_Pro_Max",
+                              @"iPhone14,4": @"iPhone/13_mini",
+                              @"iPhone14,5": @"iPhone/13",
+                              @"iPhone14,2": @"iPhone/13_Pro",
+                              @"iPhone14,3": @"iPhone/13_Pro_Max",
                               @"AppleTV2,1":@"AppleTV",        // Apple TV (2nd Generation)
                               @"AppleTV3,1":@"AppleTV",        // Apple TV (3rd Generation)
                               @"AppleTV3,2":@"AppleTV",        // Apple TV (3rd Generation - Rev A)
