@@ -75,13 +75,17 @@ For iOS:
 For Android:
 - systemName
 - systemVersion
-- applicatioName
+- applicationName
 - applicationVersion
 - buildNumber
 
 ## Versioning
 
 **Breaking History:**
+- [2.3.0](https://github.com/bebnev/react-native-user-agent/releases/tag/v2.3.0)
+    - unification for ios device names
+    - fix android gradle script
+    - add types definition
 - [2.1.0](https://github.com/bebnev/react-native-user-agent/releases/tag/v2.1.0) - support for tvos
 - [2.0.0](https://github.com/bebnev/react-native-user-agent/releases/tag/v2.0.0) - supports [autolinking](https://github.com/react-native-community/cli/blob/master/docs/autolinking.md), native code refactoring, removes UIWebView, `getWebViewUserAgent()` returns promise
 - [1.0.6](https://github.com/bebnev/react-native-user-agent/releases/tag/v1.0.6) - First release
