@@ -1,6 +1,6 @@
 {
   "name": "react-native-user-agent",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Library that helps you to get mobile application user agent and web view user agent strings.",
   "main": "index.js",
   "repository": {
