@@ -82,6 +82,8 @@ For Android:
 ## Versioning
 
 **Breaking History:**
+- [2.3.1](https://github.com/bebnev/react-native-user-agent/releases/tag/v2.3.1)
+    - fix android gradle script
 - [2.3.0](https://github.com/bebnev/react-native-user-agent/releases/tag/v2.3.0)
     - unification for ios device names
     - fix android gradle script
