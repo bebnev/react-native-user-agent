@@ -81,7 +81,7 @@ public class RNUserAgentModule extends ReactContextBaseJavaModule {
             applicationName = getReactApplicationContext().getApplicationInfo().loadLabel(getReactApplicationContext().getPackageManager()).toString();
             applicationVersion = getPackageInfo().versionName;
             buildNumber = Integer.toString(getPackageInfo().versionCode);
-            userAgent = shortPackageName + '/' + applicationVersion + '.' + buildNumber.toString() + ' ' + this.getUserAgent();
+            userAgent = applicationName + '/' + applicationVersion + '.' + buildNumber.toString() + ' ' + this.getUserAgent();
         } catch(Exception e) {
             e.printStackTrace();
         }
